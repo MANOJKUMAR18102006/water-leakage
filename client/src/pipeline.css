@@ -1,0 +1,500 @@
+/* ==========================================================================
+   AquaGrid AI - Pipeline Visualization Styles & Hydrodynamic Animations
+   ========================================================================== */
+
+.pipeline-panel {
+  margin-bottom: 16px;
+  background: #ffffff;
+  border: 1px solid #d9e6ed;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(18, 48, 64, 0.06);
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.pipeline-panel.warning-panel {
+  border-color: #f59e0b;
+  box-shadow: 0 4px 22px rgba(245, 158, 11, 0.12);
+}
+
+.pipeline-panel.critical-panel {
+  border-color: #ef4444;
+  box-shadow: 0 4px 25px rgba(239, 68, 68, 0.18);
+}
+
+.pipeline-panel.isolated-panel {
+  border-color: #94a3b8;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* Header */
+.pipeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pipeline-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pipeline-badge-icon {
+  background: #e0f2fe;
+  color: #0284c7;
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pipeline-header h3 {
+  font: 800 16px 'Manrope', sans-serif;
+  color: #0f2738;
+  margin: 0 0 3px 0;
+}
+
+.pipeline-header p {
+  font-size: 11.5px;
+  color: #64748b;
+  margin: 0;
+}
+
+.pipeline-header-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Status Pills */
+.pipe-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.pipe-status-pill.normal {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.pipe-status-pill.warning {
+  background: #fffbeb;
+  color: #d97706;
+  border: 1px solid #fde68a;
+  animation: warningPillPulse 2s infinite ease-in-out;
+}
+
+.pipe-status-pill.critical {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  animation: criticalPillPulse 1.2s infinite ease-in-out;
+}
+
+.pipe-status-pill.isolated {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.pipe-status-pill.standby {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+/* Valve Indicator */
+.valve-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+.valve-indicator small {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.valve-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.valve-indicator.open .valve-dot {
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.valve-indicator.open b {
+  color: #15803d;
+}
+
+.valve-indicator.closed .valve-dot {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+.valve-indicator.closed b {
+  color: #b91c1c;
+}
+
+/* SVG Container */
+.pipeline-canvas-wrap {
+  width: 100%;
+  background: radial-gradient(circle at 50% 50%, #f0f7fb 0%, #e2edf3 100%);
+  border: 1px solid #cfdfe8;
+  border-radius: 12px;
+  padding: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.pipeline-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   ANIMATIONS & HYDRODYNAMICS
+   ========================================================================== */
+
+/* Water Stream Movement */
+.stream-line {
+  animation: flowForward 1.8s linear infinite;
+}
+
+.stream-line-fast {
+  animation: flowForward 1.2s linear infinite;
+}
+
+.stream-line-rev {
+  animation: flowForward 2.2s linear infinite;
+}
+
+@keyframes flowForward {
+  0% {
+    stroke-dashoffset: 40;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Moving Bubbles */
+.bubble-1 {
+  animation: bubbleWobble1 2.4s ease-in-out infinite;
+}
+
+.bubble-2 {
+  animation: bubbleWobble2 2.8s ease-in-out infinite;
+}
+
+@keyframes bubbleWobble1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(16px, -2px);
+  }
+  100% {
+    transform: translate(32px, 0);
+  }
+}
+
+@keyframes bubbleWobble2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(18px, 2px);
+  }
+  100% {
+    transform: translate(36px, 0);
+  }
+}
+
+/* Valve Actuator Beacon */
+.valve-led-open {
+  animation: greenBeacon 2s infinite ease-in-out;
+}
+
+.valve-led-closed {
+  animation: redBeacon 0.9s infinite ease-in-out;
+}
+
+@keyframes greenBeacon {
+  0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 2px #22c55e); }
+  50% { opacity: 1; filter: drop-shadow(0 0 7px #22c55e); }
+}
+
+@keyframes redBeacon {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 2px #ef4444); }
+  50% { opacity: 1; filter: drop-shadow(0 0 9px #ef4444); }
+}
+
+/* ==========================================================================
+   SMALL LEAK (ZONE 2) ANIMATIONS
+   ========================================================================== */
+.leak-boundary-warning {
+  animation: warningBorderGlow 1.8s infinite ease-in-out;
+}
+
+@keyframes warningBorderGlow {
+  0%, 100% { stroke-opacity: 0.4; }
+  50% { stroke-opacity: 1; stroke-width: 4px; }
+}
+
+/* Droplets falling from Zone 2 crack */
+.drip {
+  animation: dripFall 1.4s infinite cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+.drip-1 { animation-delay: 0s; }
+.drip-2 { animation-delay: 0.28s; }
+.drip-3 { animation-delay: 0.56s; }
+.drip-4 { animation-delay: 0.84s; }
+.drip-5 { animation-delay: 1.12s; }
+
+@keyframes dripFall {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(46px);
+    opacity: 0;
+  }
+}
+
+/* Spray mist */
+.mist-spray {
+  animation: mistWobble 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes mistWobble {
+  0% { stroke-width: 3.5; opacity: 0.6; }
+  100% { stroke-width: 5; opacity: 0.9; }
+}
+
+/* Catch basin puddle ripple */
+.puddle-ripple {
+  animation: rippleExpand 1.5s infinite ease-out;
+  transform-origin: 578px 286px;
+}
+
+@keyframes rippleExpand {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ==========================================================================
+   MAJOR LEAK (ZONE 3) HIGH-PRESSURE GEYSER
+   ========================================================================== */
+.leak-boundary-critical {
+  animation: criticalBorderGlow 1s infinite ease-in-out;
+}
+
+@keyframes criticalBorderGlow {
+  0%, 100% { stroke-opacity: 0.5; stroke-width: 3px; }
+  50% { stroke-opacity: 1; stroke-width: 5px; }
+}
+
+.geyser-jet {
+  animation: geyserSurge 0.5s infinite alternate ease-in-out;
+}
+
+.jet-left { animation-duration: 0.45s; }
+.jet-center { animation-duration: 0.38s; }
+.jet-right { animation-duration: 0.48s; }
+
+@keyframes geyserSurge {
+  0% {
+    stroke-width: 5;
+    opacity: 0.75;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-width: 8;
+    opacity: 1;
+    stroke-dashoffset: 20;
+  }
+}
+
+/* Spray clouds pulsing */
+.spray-cloud {
+  animation: cloudPuff 0.7s infinite alternate ease-in-out;
+  transform-origin: 832px 65px;
+}
+
+.cloud-1 { animation-delay: 0s; }
+.cloud-2 { animation-delay: 0.2s; }
+.cloud-3 { animation-delay: 0.35s; }
+
+@keyframes cloudPuff {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.25); opacity: 0.95; }
+}
+
+/* Flying droplets */
+.spray-drop {
+  animation: sprayScatter 0.8s infinite ease-out;
+}
+
+.drop-1 { animation-delay: 0.05s; }
+.drop-2 { animation-delay: 0.15s; }
+.drop-3 { animation-delay: 0.3s; }
+.drop-4 { animation-delay: 0.45s; }
+.drop-5 { animation-delay: 0.6s; }
+.drop-6 { animation-delay: 0.7s; }
+
+@keyframes sprayScatter {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(sin(1) * 15px), -25px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+.puddle-ripple-fast {
+  animation: rippleFast 0.9s infinite ease-out;
+  transform-origin: 832px 286px;
+}
+
+@keyframes rippleFast {
+  0% { transform: scale(0.5); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Paused or Isolated State */
+.flow-stopped .stream-line,
+.flow-stopped .stream-line-fast,
+.flow-stopped .stream-line-rev,
+.flow-stopped .bubble-1,
+.flow-stopped .bubble-2 {
+  animation-play-state: paused !important;
+  opacity: 0.15 !important;
+}
+
+/* Pills pulse */
+@keyframes warningPillPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+}
+
+@keyframes criticalPillPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 14px rgba(239, 68, 68, 0.4); }
+}
+
+/* ==========================================================================
+   TELEMETRY STRIP (Under SVG)
+   ========================================================================== */
+.pipeline-telemetry-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #edf2f5;
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.telemetry-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #82939d;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.telemetry-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+}
+
+.telemetry-valve-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.telemetry-valve-btn.btn-open {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.telemetry-valve-btn.btn-open:hover {
+  background: #fee2e2;
+}
+
+.telemetry-valve-btn.btn-closed {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.telemetry-valve-btn.btn-closed:hover {
+  background: #d1fae5;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT
+   ========================================================================== */
+@media (max-width: 800px) {
+  .pipeline-telemetry-bar {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .pipeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
